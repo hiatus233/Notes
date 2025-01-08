@@ -1,0 +1,20 @@
+{
+  "workspace:edit-file-title": [],
+  "obsidian-tasks-plugin:toggle-done": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Enter"
+    }
+  ],
+  "editor:open-link-in-new-leaf": [],
+  "obsidian-tasks-plugin:edit-task": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": " "
+    }
+  ]
+}
