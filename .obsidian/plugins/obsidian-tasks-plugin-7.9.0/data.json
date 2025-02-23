@@ -3,14 +3,14 @@
   "globalFilter": "",
   "removeGlobalFilter": false,
   "taskFormat": "tasksPluginEmoji",
-  "setCreatedDate": false,
-  "setDoneDate": false,
+  "setCreatedDate": true,
+  "setDoneDate": true,
   "setCancelledDate": true,
   "autoSuggestInEditor": true,
   "autoSuggestMinMatch": 0,
   "autoSuggestMaxItems": 20,
   "provideAccessKeys": true,
-  "useFilenameAsScheduledDate": false,
+  "useFilenameAsScheduledDate": true,
   "filenameAsScheduledDateFormat": "",
   "filenameAsDateFolders": [],
   "recurrenceOnNextLine": false,
@@ -26,7 +26,7 @@
       {
         "symbol": "x",
         "name": "Done",
-        "nextStatusSymbol": " ",
+        "nextStatusSymbol": "2",
         "availableAsCommand": true,
         "type": "DONE"
       }
@@ -38,6 +38,13 @@
         "nextStatusSymbol": "x",
         "availableAsCommand": true,
         "type": "IN_PROGRESS"
+      },
+      {
+        "symbol": "2",
+        "name": "禁用",
+        "nextStatusSymbol": " ",
+        "availableAsCommand": false,
+        "type": "CANCELLED"
       }
     ]
   },

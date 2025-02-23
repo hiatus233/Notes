@@ -2,5 +2,12 @@
   "obsidian-hover-editor",
   "obsidian-style-settings",
   "obsidian-tasks-plugin",
-  "obsidian-file-path-to-uri"
+  "obsidian-file-path-to-uri",
+  "obsidian-admonition",
+  "table-editor-obsidian",
+  "obsidian-excalidraw-plugin",
+  "obsidian-custom-attachment-location",
+  "media-extended",
+  "sheet-plus",
+  "obsidian-pandoc"
 ]

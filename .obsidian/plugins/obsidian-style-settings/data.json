@@ -35,5 +35,9 @@
   "Appearance-dark@@interactive-normal@@dark": "#363636",
   "Appearance-dark@@interactive-hover@@dark": "#3F3F3F",
   "Appearance-dark@@background-activated-tab-header-dark": "#FFFFFF13",
-  "Appearance-dark@@shadow-activated-tab-header-dark": "none"
+  "Appearance-dark@@shadow-activated-tab-header-dark": "none",
+  "Editor@@line-hover-indicator": false,
+  "Editor@@list-marker-color-hover@@light": "#FFFFFF",
+  "Editor@@list-marker-color@@light": "#FF5286",
+  "Editor@@bold-color@@light": "#4544FD"
 }
