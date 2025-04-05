@@ -1,8 +1,9 @@
 {
   "accentColor": "",
   "theme": "moonstone",
-  "baseFontSize": 16,
+  "baseFontSize": 14,
   "baseFontSizeAction": true,
   "cssTheme": "Border",
-  "enabledCssSnippets": []
+  "enabledCssSnippets": [],
+  "nativeMenus": false
 }

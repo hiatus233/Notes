@@ -68,7 +68,10 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	- [1] 在地块上随机生成事件地块（商店，篝火等等）
 	
 - [x] 琢磨一下odin插件——会用就行
-- [ ] 优化UI系统，整合框架
+- [1] 优化UI系统，整合框架
+	- [ ] 将玩家的血条放置到persistent中，能够持久化保存玩家状态，玩家血条放置到左上角，参考杀戮尖塔，能够更直观的表现自己的血量资源。
+	- [ ] 美化一下UI，将玩家血条，遗物等信息整理一下
+	- [x] 制作descriptionPanel,用于响应鼠标悬停事件
 	- [x] 在游戏开始时，在玩家点击对应瓦片后生成player，并显示战斗UI() ✅ 2025-02-23
 - [x] 设计金币 🔼——场景切换后保持金币不变（数据持久，将金币也添加到SO——statscontainer之中，仅玩家需要）
 	- [x] 给玩家添加gold字段，封装到Stat类型，用于计算玩家所得金币数
@@ -85,14 +88,13 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 - [x] 先实现一下relic遗物机制吧 ⏫
 - [ ] 存档系统
 	- [ ] 对于存档系统来说，Scriptableobject转json并不支持复杂SO类（比如类内嵌套对象等），所以要考虑将对应的复杂SO类，转为对应的普通类进行[序列化](https://www.bilibili.com/opus/980703696992075785)。
+	- [ ] 跨场景时玩家的statsContainer没有保存，需要保存玩家的状态。
 	- [ ] 考虑慢慢地把项目从so存储改成json存储，以so存储的数据实在是有些过于臃肿了，好用但是不好维护
 	- [ ] 保存数据类，重构entity，relic类，card类。
 	- [ ] 将statscontainer修改成别的存储结构，而不是用so，这样游戏打包后玩家的状态并没有办法实时存储
 - [1] 设计更多卡牌和遗物 🔽
 - [x] 统一资源加载功能为addressables异步加载 并使用资源加载功能实现场景切换 ⏫ ➕ 2024-11-30 📅 2024-12-01
-- [ ] 美化一下UI，将玩家血条，遗物等信息整理一下
-	- [ ] 玩家血条，玩家护甲，relic等UI元素存储在player的canvas下
-	- [x] 制作descriptionPanel,用于响应鼠标悬停事件
+
 - [1] **随机事件(瓦片)**
 	- [1] 在战斗开始时，每一层的随机瓦片上会出现标志(包括商店，篝火，随机事件)
 		- [ ] 玩家能通过移动到这些随机标志位置上增强自身，同时摧毁这些地砖也会受到一些增益/减益
@@ -140,10 +142,27 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 		- [ ] 通过currentPreview显示建造后效果
 		- [ ] 在建造模式下鼠标右键取消建造效果，按下键盘上的esc退出建造模式
 		- [ ] 鼠标左键点击建造瓦片后，弹出确认建造UI，再次点击确认退出建造模式
-	- [ ] 将地砖改为用对象池技术存储，便于复用。
+	- [2] 将地砖改为用对象池技术存储，便于复用。 ❌ 2025-03-13
  - [2] 或许重构最基础的Grid系统，改用TileMap，先初步迭代出原型 ➕ 2025-02-12 ❌ 2025-02-12——SBUnity-Tilemap根本满足不了我强烈的增删需求。 
-- [1] 随机地图
-	- [1] 保存地图
+ - [x] 降低耦合性，用事件减少一下报空的问题，比如MapGenerator中加载和创建数据时先用事件唤起 ✅ 2025-03-31
+- [x] 随机地图 ✅ 2025-03-31
+	- [x] 保存地图 ✅ 2025-03-31
+
+- [ ] 🛫 2025-04-03 
+```ad-hint
+战斗房间的UI上
+当玩家位于某层时，应该显示出玩家当前位于第几层，如图：
+![[战斗UI.png]]
+```
+
+
+- [ ] 给敌人添加类型标记，不同类型的敌人有不同种的意图。
+- [ ] 添加地块随机事件系统。
+- [ ] 增加完整度，添加休息房，商店房和宝箱房还有随机房
+- [ ] 添加更多敌人，给boss房还有精英房和普通敌人房做出区分
+- [ ] 添加更多卡牌和遗物，增加内容丰富度
+- [ ] 
+
 # 美术资产
 
 - [x] 主角四方向视图 
@@ -163,7 +182,7 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 - 将reachrange也纳入卡牌的信息显示中
 
 
-# 需要修复的bug（已知）
+# [需要修复的bug（已知）](Bug)
 - [1] 敌人初始会出生在岩浆格子上 🔽
 - [x] 按下移动按钮后仍然能够点击结束按钮
 - [x] 在tile被禁用后，寻路出现问题，没有办法及时更新路径
@@ -252,15 +271,3 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-[^1]: 
