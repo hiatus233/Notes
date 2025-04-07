@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "0db8768ab0ab35dc",
@@ -182,10 +183,17 @@
   "active": "d741cb68d325a94e",
   "lastOpenFiles": [
     "game/卡牌战棋游戏/card game(TODO).md",
-    "game/卡牌战棋游戏/UI设计.md",
-    "game/卡牌战棋游戏/Bug.md",
-    "game/卡牌战棋游戏/().md",
+    "复习_面试/操作系统实践/实验三 Linux进程管理.md",
+    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407113533645.png",
+    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407113515131.png",
+    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407111043590.png",
+    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407105927787.png",
+    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407105214501.png",
+    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407105154710.png",
     "game/卡牌战棋游戏/基本系统.md",
+    "game/卡牌战棋游戏/Bug.md",
+    "game/卡牌战棋游戏/UI设计.md",
+    "game/卡牌战棋游戏/().md",
     "game/卡牌战棋游戏/知识文档.md",
     "game/卡牌战棋游戏/策划案.md",
     "game/卡牌战棋游戏/assets/随机事件表.md",
@@ -198,13 +206,7 @@
     "game/卡牌战棋游戏/assets/card game(TODO)/file-20250303134600785.png",
     "game/卡牌战棋游戏/assets/card game(TODO)/file-20250304164009585.png",
     "game/卡牌战棋游戏/assets/card game(TODO)/file-20250304164103803.png",
-    "game/卡牌战棋游戏/assets/card game(TODO)/file-20250403110342812.png",
-    "game/卡牌战棋游戏/assets/card game(TODO)/原本persistent配置.png",
     "复习_面试/游戏拆解案/酒馆战棋拆解&体验分析.md",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/冻结酒馆.png",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/酒馆战棋流程图.png",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/流派平均排名对比.png",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/商店老板.png",
     "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/ps9953.tmp",
     "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/psFF17.tmp",
     "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/ps31ED.tmp",
@@ -214,7 +216,6 @@
     "复习_面试/游戏拆解案/体验报告.md",
     "复习_面试/游戏拆解案/assets/拆解案",
     "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析",
-    "复习_面试/操作系统实践/实验三 Linux进程管理.md",
     "复习_面试/操作系统实践/assets/实验三 Linux进程管理",
     "复习_面试/操作系统实践/实验一 Linux内核模块编程.md",
     "game/卡牌战棋游戏/遗物.md",
@@ -226,7 +227,6 @@
     "复习_面试/操作系统/操作系统.md",
     "复习_面试/操作系统/未命名.md",
     "Excalidraw/Drawing 2025-03-08 17.40.40.excalidraw.md",
-    "game/讲座心得/卢德工作室-卷毛菌丝老师讲座/第4讲 游戏设计基础.md",
     "game/分析文档.canvas",
     "game/未命名 1.canvas"
   ]
