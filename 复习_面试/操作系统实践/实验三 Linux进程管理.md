@@ -29,7 +29,6 @@ int main()
     printf("[*] Hello world! I'm cmd3.\n");
     return 0;
 }
-                                                                                                                                                                                 
 ```
 **cmd3**
 ```
@@ -107,7 +106,7 @@ int main() {
 
 #### fork()
 
-`fork()` : 创建一个普通进程，调用一次返回两次，子进程中返回 `0` ，父进程中返回 **`子进程pid`** 。清楚哪些代码块是子进程可以达到的，那些代码块是父进程可以达到的，对接下来的实验至关重要。
+`fork()` : 创建一个普通进程，调用一次返回两次，子进程中返回 `0` ，父进程中返回 **`子进程pid`** 。
 
 #### execl()
 
@@ -125,122 +124,122 @@ int main() {
 ### 父子进程通信
 
 ```
-* ====================== pipe_sync.c ====================== */
+/* ====================== pipe_sync.c ====================== */
 #include <stdio.h>
-#include <pthread.h>
-#include <semaphore.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <stdlib.h>
+#include <semaphore.h>
 #include <string.h>
+#include <signal.h>
+#include <time.h>
+#include <errno.h>
 
-#define SEM_W "sem_write"
-#define SEM_R "sem_read"
-#define ENABLE_NUM 3
+#define SEM_MUTEX "/pipe_mutex"
+#define SEM_FULL  "/pipe_full"
+#define CHILDREN_NUM 3
+#define BLOCK_SIZE 65536       // 64KB/次
+#define TOTAL_WRITE (BLOCK_SIZE * 8)  // 512KB/进程
 
-void write_to_pipe(int fd[2], int sid);
-int read_from_pipe(int fd[2]);
-void P(sem_t *sem_ptr);
-void V(sem_t *sem_ptr);
-void catch_INT(int sig);
-void destroy_sem();
+int pipe_fd[2];
+sem_t *mutex, *full;
 
-int main(void)
-{
-    int fd[2];
-    pid_t pid;
-    int ret = -1, child_num = ENABLE_NUM, enable_val = -1, sid = 0, i;
-    sem_t *write_psx, *read_psx;
-    write_psx = sem_open(SEM_W, O_CREAT, 0666, 1);
-    read_psx = sem_open(SEM_R, O_CREAT, 0666, 0);
+void cleanup() {
+    sem_close(mutex);
+    sem_close(full);
+    sem_unlink(SEM_MUTEX);
+    sem_unlink(SEM_FULL);
+    close(pipe_fd[0]);
+    close(pipe_fd[1]);
+}
 
-    if (pipe(fd) < 0) {
-        printf("✖ 管道创建失败\n");
-        exit(1);
-    }
-    for (i = 0; i < child_num; i++) {
-        pid = fork();
-        sid++;
-        if (pid < 0) {
-            printf("✖ 进程创建失败\n");
-            destroy_sem();
-            exit(0);
-        } else if (pid == 0) {
+void sig_handler(int sig) {
+    printf("\n[信号] 程序终止\n");
+    cleanup();
+    exit(EXIT_SUCCESS);
+}
+
+void child_process(int id) {
+    close(pipe_fd[0]);
+    
+    char *buffer = malloc(TOTAL_WRITE);
+    memset(buffer, '0'+id, TOTAL_WRITE);
+
+    int written = 0;
+    while(written < TOTAL_WRITE) {
+        sem_wait(mutex);//占用信号
+        
+        int ret = write(pipe_fd[1], buffer + written, BLOCK_SIZE);
+        if(ret == -1) {
+            if(errno == EAGAIN) {
+                printf("子进程%d：管道满等待\n", id);
+                sem_post(mutex);//释放信号
+                sleep(1);
+                continue;
+            }
+            perror("写入错误");
             break;
         }
+        
+        written += ret;
+        printf("子进程%d：累计写入 %dKB\n", id, written/1024);
+        
+        sem_post(mutex);
+        sem_post(full);
     }
-    if (pid == 0) {
-        P(write_psx);
-        write_to_pipe(fd, sid);
-        V(read_psx);
-        V(write_psx);
-        exit(0);
-    } else {
-        signal(SIGINT, catch_INT);
-        while (1) {
-            P(read_psx);
-            P(read_psx);
-            P(read_psx);
-            read_from_pipe(fd);
+    
+    free(buffer);
+    close(pipe_fd[1]);
+    exit(EXIT_SUCCESS);
+}
+
+void parent_process() {
+    close(pipe_fd[1]);
+
+    char buffer[BLOCK_SIZE];
+    
+    while(1) {
+        sem_wait(full);
+        
+        int ret = read(pipe_fd[0], buffer, sizeof(buffer));
+        if(ret <= 0) break;
+        
+        printf("父进程：收到 %dKB 数据\n", ret/1024);
+        usleep(1000000);  // 1秒延迟
+    }
+    
+    cleanup();
+}
+
+int main() {
+    srand(time(NULL));
+    signal(SIGINT, sig_handler);
+    
+    // 增加并发写入许可数
+    mutex = sem_open(SEM_MUTEX, O_CREAT, 0644, 5);
+    full = sem_open(SEM_FULL, O_CREAT, 0644, 0);
+    
+    if(pipe(pipe_fd) == -1) {
+        perror("创建管道失败");
+        exit(EXIT_FAILURE);
+    }
+
+    for(int i=0; i<CHILDREN_NUM; i++) {
+        if(fork() == 0) {
+            child_process(i+1);
         }
     }
+
+    parent_process();
     return 0;
-}
-
-void write_to_pipe(int fd[2], int sid)
-{
-    int value;
-    char buf[10];
-    close(fd[0]);
-    memset(buf, sid + '0', sizeof(char)*10);
-    printf("├── 子进程[%d] 发送 %dB\n", sid, (int)sizeof(buf));
-    write(fd[1], buf, sizeof(buf));
-}
-
-int read_from_pipe(int fd[2])
-{
-    int ret;
-    char buf[1024];
-    close(fd[1]);
-    memset(buf, '\0', sizeof(char)*1024);
-    ret = read(fd[0], buf, 1024);
-    while (ret > 0) {
-        printf("└── 父进程接收: %dB → %s\n", ret, buf);
-        memset(buf, '\0', 1024);
-        ret = read(fd[0], buf, 1024);
-    }
-    return ret;
-}
-
-void P(sem_t *sem_ptr)
-{
-    sem_wait(sem_ptr);
-}
-
-void V(sem_t *sem_ptr)
-{
-    sem_post(sem_ptr);
-}
-
-void catch_INT(int sig)
-{
-    printf("\n════ 捕获 CTRL+C 信号 ════\n");
-    destroy_sem();
-    exit(0);
-}
-
-void destroy_sem()
-{
-    sem_unlink(SEM_W);
-    sem_unlink(SEM_R);
 }
 
 ```
 
-![[file-20250407105927787.png]]
 
+![[file-20250411104150067.png]]
 ### 管道默认大小
 
 ```
@@ -308,7 +307,20 @@ void write_to_pipe(int fd[2])
 
 ![[file-20250407105154710.png]]![[file-20250407105214501.png]]
 
+### 实验详解
+Linux的POSIX机制设计了一组精心设计的信号量接口进行操作，这些函数都是对成组的信号量进行操作的，他们都声明在sys/sem.h
+#### sem_t
+  **sem_t 是在 POSIX 系统中用来实现信号量机制的类型**。它是一个不透明的数据结构，用于控制多个进程或线程对共享资源的访问。
+  sem_t 提供了三个主要的函数接口：
+```
+sem_init：用于初始化一个信号量。该函数接受三个参数，分别是指向 sem_t 对象的指针、信号量的共享标志和初始值。共享标志指定信号量的共享方式，根据具体需求可以选择在进程间共享（设置为0）或者在同一进程内的线程间共享（设置为非0）。初始值表示信号量的初始计数值。
 
+sem_wait：该函数使调用线程等待信号量。如果信号量的计数值大于0，则将计数值减一，并立即返回。如果计数值为0，则线程将阻塞，直到信号量的计数值大于0。
+
+sem_post：该函数用于释放信号量。它将信号量的计数值加一，并唤醒因等待该信号量而阻塞的线程。
+
+sem_destroy：该函数是用于销毁一个已经初始化的信号量的函数，在使用完信号量后，通过调用该函数可以释放相关资源。  
+```
 
 ## 消息队列通信
 ### 实验要求
@@ -324,139 +336,246 @@ msg_queue.c
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
+#include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
 
-#define MSG_TYPE_NORMAL 1
-#define MSG_TYPE_END1    2
-#define MSG_TYPE_END2    3
-#define MSG_TYPE_OVER1   4
-#define MSG_TYPE_OVER2   5
+#define send_type	1
+#define recv_type	2
 
-typedef struct {
+#define send_1_to_recv	1
+#define send_2_to_recv	2
+#define recv_to_send_1	3
+#define recv_to_send_2	4
+
+#define bool	int
+#define false 	0
+#define true	1
+
+
+void *send_thread_1(void *arg);
+void *send_thread_2(void *arg);
+void *recv_thread(void *arg);
+void P(sem_t *sem_ptr);
+void V(sem_t *sem_ptr);
+
+sem_t send_psx, recv_psx, final_recv_1, final_recv_2;
+pthread_t send_pid_1, send_pid_2, recv_pid;
+int count = 1;
+bool send_1_over = false;
+bool send_2_over = false;
+
+struct msgbuf
+{
     long mtype;
     char mtext[256];
-} Message;
-
-sem_t sem_sender1, sem_sender2, sem_receiver;
-pthread_mutex_t mutex;
+    int mw2w;
+};
 int msgid;
-int sender1_done = 0, sender2_done = 0;
 
-void* sender1(void* arg) {
-    Message msg;
-    while(1) {
-        // 获取用户输入
-        printf("[Sender1] 输入消息: ");
-        fgets(msg.mtext, 256, stdin);
-        msg.mtext[strcspn(msg.mtext, "\n")] = '\0'; // 去除换行符
+int main(void)
+{
+    sem_init(&send_psx, 0, 1);
+    sem_init(&recv_psx, 0, 0);
+    sem_init(&final_recv_1, 0, 0);
+    sem_init(&final_recv_2, 0, 0);
 
-        // 发送消息
-        if(strcmp(msg.mtext, "exit") == 0) {
-            msg.mtype = MSG_TYPE_END1;
-            msgsnd(msgid, &msg, sizeof(msg.mtext), 0);
-            sem_post(&sem_receiver);
-            break;
-        }
-        msg.mtype = MSG_TYPE_NORMAL;
-        msgsnd(msgid, &msg, sizeof(msg.mtext), 0);
-        sem_post(&sem_receiver);
+    msgid = msgget(IPC_PRIVATE, 0666|IPC_CREAT);
+    if (msgid < 0) {
+        printf("[错误] msgget() 调用失败\n");  // 修改
+        exit(1);
     }
+    pthread_create(&send_pid_1, NULL, send_thread_1, NULL);
+    pthread_create(&send_pid_2, NULL, send_thread_2, NULL);
+    pthread_create(&recv_pid, NULL, recv_thread, NULL);
 
-    // 等待应答
-    sem_wait(&sem_sender1);
-    msgrcv(msgid, &msg, sizeof(msg.mtext), MSG_TYPE_OVER1, 0);
-     printf("[Sender2] 收到应答: %s\n", msg.mtext);
-
-    pthread_mutex_lock(&mutex);
-    sender2_done = 1;
-    pthread_mutex_unlock(&mutex);
-
-    return NULL;
-}
-
-void* receiver(void* arg) {
-    Message msg;
-    while(1) {
-        sem_wait(&sem_receiver);
-
-        // 接收所有类型的消息
-        if(msgrcv(msgid, &msg, sizeof(msg.mtext), -6, IPC_NOWAIT) == -1) {
-            continue;
-        }
-
-        switch(msg.mtype) {
-            case MSG_TYPE_NORMAL:
-                printf("[Receiver] 收到消息: %s\n", msg.mtext);
-                break;
-
-            case MSG_TYPE_END1: {
-                Message response = {MSG_TYPE_OVER1, "over1"};
-                msgsnd(msgid, &response, sizeof(response.mtext), 0);
-                sem_post(&sem_sender1);
-                printf("[Receiver] 收到结束信号1，发送应答\n");
-                break;
-            }
-
-            case MSG_TYPE_END2: {
-			Message response = {MSG_TYPE_OVER2, "over2"};
-                msgsnd(msgid, &response, sizeof(response.mtext), 0);
-                sem_post(&sem_sender2);
-                printf("[Receiver] 收到结束信号2，发送应答\n");
-                break;
-            }
-        }
-
-        // 检查是否全部完成
-        pthread_mutex_lock(&mutex);
-        if(sender1_done && sender2_done) {
-            pthread_mutex_unlock(&mutex);
-            break;
-        }
-        pthread_mutex_unlock(&mutex);
-    }
-
-    // 清理消息队列
-    msgctl(msgid, IPC_RMID, NULL);
-    printf("[Receiver] 消息队列已清理\n");
-    return NULL;
-}
-
-int main() {
-    // 初始化消息队列
-    msgid = msgget(IPC_PRIVATE, 0666 | IPC_CREAT);
-
-    // 初始化同步对象
-    sem_init(&sem_sender1, 0, 0);
-    sem_init(&sem_sender2, 0, 0);
-    sem_init(&sem_receiver, 0, 0);
-    pthread_mutex_init(&mutex, NULL);
-
-    // 创建线程
-    pthread_t t1, t2, t3;
-    pthread_create(&t1, NULL, sender1, NULL);
-    pthread_create(&t2, NULL, sender2, NULL);
-    pthread_create(&t3, NULL, receiver, NULL);
-    // 等待线程结束
-    pthread_join(t1, NULL);
-    pthread_join(t2, NULL);
-    pthread_join(t3, NULL);
-
-    // 清理资源
-    sem_destroy(&sem_sender1);
-    sem_destroy(&sem_sender2);
-    sem_destroy(&sem_receiver);
-    pthread_mutex_destroy(&mutex);
+    pthread_join(send_pid_1, NULL);
+    pthread_join(send_pid_2, NULL);
+    pthread_join(recv_pid, NULL);
 
     return 0;
 }
+
+void *send_thread_1(void *arg)
+{
+    char info[256];                                    
+    struct msgbuf s_msg;
+    s_msg.mtype = send_type;
+    s_msg.mw2w = send_1_to_recv;
+    while (1) {
+        P(&send_psx);
+
+    printf("[消息计数: %d]\n", count);  // 修改
+        printf("[发送线程1] 请输入消息: ");  // 修改
+        scanf("%s", info);
+  
+        if ((strcmp(info, "exit") == 0) || (strcmp(info, "end1") == 0)) {
+            strcpy(s_msg.mtext, "end1");
+            msgsnd(msgid, &s_msg, sizeof(struct msgbuf), 0);
+            V(&recv_psx);
+            break;
+        }
+        strcpy(s_msg.mtext, info);
+        count++;
+        msgsnd(msgid, &s_msg, sizeof(struct msgbuf), 0);
+        V(&recv_psx);
+    
+    }
+    P(&final_recv_1);
+
+    msgrcv(msgid, &s_msg, sizeof(struct msgbuf), recv_type, 0);
+    printf("[发送线程1] 收到应答: %s\n", s_msg.mtext);  // 修改
+    count++;
+
+    V(&send_psx);                  
+    
+    if (send_1_over && send_2_over){
+    msgctl(msgid, IPC_RMID, 0);
+    }           
+    pthread_exit(NULL);
+}
+
+void *send_thread_2(void *arg)
+{
+    char info[256];                                     
+    struct msgbuf s_msg;
+    s_msg.mtype = send_type;
+    s_msg.mw2w = send_2_to_recv;
+    while (1) {
+        P(&send_psx);
+
+    printf("[消息计数: %d]\n", count);  // 修改
+        printf("[发送线程2] 请输入消息: ");  // 修改
+        scanf("%s", info);
+      
+        if ((strcmp(info, "exit") == 0) || (strcmp(info, "end2") == 0)) {
+            strcpy(s_msg.mtext, "end2");
+            msgsnd(msgid, &s_msg, sizeof(struct msgbuf), 0);
+            V(&recv_psx);
+            break;
+        }
+        strcpy(s_msg.mtext, info);
+        count++;
+        msgsnd(msgid, &s_msg, sizeof(struct msgbuf), 0);
+        V(&recv_psx);
+
+    }
+    P(&final_recv_2);
+
+    count++;
+    msgrcv(msgid, &s_msg, sizeof(struct msgbuf), recv_type, 0);
+    printf("[发送线程2] 收到应答: %s\n", s_msg.mtext);  // 修改
+
+    V(&send_psx);                   
+
+    if (send_1_over && send_2_over){
+    msgctl(msgid, IPC_RMID, 0);
+    }           
+    pthread_exit(NULL);
+}
+
+void *recv_thread(void *arg)
+{
+    struct msgbuf r_msg;
+    while (1) {
+        P(&recv_psx);
+        msgrcv(msgid, &r_msg, sizeof(struct msgbuf), send_type, 0);
+    if (r_msg.mw2w == send_1_to_recv){
+            if (strcmp(r_msg.mtext, "end1") == 0) {
+                strcpy(r_msg.mtext, "over1");
+                r_msg.mtype = recv_type;
+        r_msg.mw2w = recv_to_send_1;
+                msgsnd(msgid, &r_msg, sizeof(struct msgbuf), 0);
+                printf("[接收线程] 收到来自发送线程1的结束信号，返回应答: over1\n");  // 修改
+
+                V(&final_recv_1);
+                send_1_over = true;
+            }
+            else {
+                printf("[接收线程] 收到来自发送线程1的消息: %s\n", r_msg.mtext);  // 修改
+            V(&send_psx);
+        }
+    }
+    else if (r_msg.mw2w == send_2_to_recv) {
+            if (strcmp(r_msg.mtext, "end2") == 0) {
+                strcpy(r_msg.mtext, "over2");
+                r_msg.mtype = recv_type;
+        r_msg.mw2w = recv_to_send_2;
+                msgsnd(msgid, &r_msg, sizeof(struct msgbuf), 0);
+                printf("[接收线程] 收到来自发送线程2的结束信号，返回应答: over2\n");  // 修改
+
+                V(&final_recv_2);
+        send_2_over = true;
+                
+            }
+            else {
+                printf("[接收线程] 收到来自发送线程2的消息: %s\n", r_msg.mtext);  // 修改
+            V(&send_psx);
+        }
+    }
+    
+
+    if (send_1_over && send_2_over){
+        break;
+    }
+    }
+    pthread_exit(NULL);
+}
+
+void P(sem_t *sem_ptr)
+{
+    sem_wait(sem_ptr);
+}
+
+void V(sem_t *sem_ptr)
+{
+    sem_post(sem_ptr);
+}
+
 ```
 
 
-![[file-20250407111043590.png]]
+### 实验结果
+[消息计数: 1]
+[发送线程1] 请输入消息: hi
+[接收线程] 收到来自发送线程1的消息: hi
+[消息计数: 2]
+[发送线程2] 请输入消息: hello
+[接收线程] 收到来自发送线程2的消息: hello
+[消息计数: 3]
+[发送线程1] 请输入消息: world
+[接收线程] 收到来自发送线程1的消息: world
+[消息计数: 4]
+[发送线程2] 请输入消息: exit
+[接收线程] 收到来自发送线程2的结束信号，返回应答: over2
+[发送线程2] 收到应答: over2
+[消息计数: 5]
+[发送线程1] 请输入消息: over
+[接收线程] 收到来自发送线程1的消息: over
+[消息计数: 6]
+[发送线程1] 请输入消息: exit
+[接收线程] 收到来自发送线程1的结束信号，返回应答: over1
+[发送线程1] 收到应答: over1
+
+### 实验详解
+**消息队列是在两个不相关进程间传递数据的一种简单、高效方式，她独立于发送进程、接受进程而存在。**
+![[file-20250411113631305.png]]
+从宏观角度讲，因为消息队列独立于进程而存在，为了区别不同的消息队列，需要以key值标记消息队列，这样两个不相关进程可以通过事先约定的key值通过消息队列进行消息收发。例如进程A向key消息队列发送消息，进程B从Key消息队列读取消息。在这一过程中主要涉及到四个函数：
+```
+#include <sys/msg.h> # 消息队列相关函数及数据结构头文件
+
+int msgctl(int msqid, int cmd, struct msqid_ds *buf);# 控制消息队列函数
+
+int msgget(key_t key, int msgflg); # 创建消息队列，key值唯一标识该消息队列
+
+int msgrcv(int msqid, void *msg_ptr, size_t msg_sz, long int msgtype, int msgflg);# 接收消息
+
+int msgsnd(int msqid, const void *msg_ptr, size_t msg_sz, int msgflg);# 发送消息
+```
 
 ## 共享内存通信
 ### 实验要求
@@ -667,3 +786,16 @@ int main() {
 }
 ```
 ![[file-20250407113515131.png]]![[file-20250407113533645.png]]
+### 实验详解
+**两个进程地址通过页表映射到同一片物理地址以便于通信,你可以给一个区域里面写入数据，理所当然你就可以从中拿取数据，这也就构成了进程间的双向通信**
+![[file-20250411120524222.png]]
+#### 具体函数
+```
+创建共享内存——>shmget() 函数
+int shmget(key_t key, size_t size, int shmflg);//成功返回共享内存的ID,出错返回-1
+操作共享内存———>shmctl()函数
+int shmctl(int shm_id, int cmd, struct shmid_ds *buf);//成功返回0，出错返回-1
+挂接操作———>shmat()函数
+void *shmat(int shm_id, const void *shm_addr, int shmflg);//成功返回指向共享存储段的指针，出错返回-1
+
+```
