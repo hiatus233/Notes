@@ -4,6 +4,8 @@
   "baseFontSize": 16,
   "baseFontSizeAction": true,
   "cssTheme": "Border",
-  "enabledCssSnippets": [],
+  "enabledCssSnippets": [
+    "mermaid"
+  ],
   "nativeMenus": false
 }

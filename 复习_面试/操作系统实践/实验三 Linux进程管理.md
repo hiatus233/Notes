@@ -3,9 +3,7 @@
 (2)通过Linux管道通信机制、消息队列通信机制、共享内存通信机制的应用，加深对不同类型的进程通信方式的理解。
 (3)通过对 Linux 的 POSIX 信号量及 IPC 信号量的应用,加深对信号量同步机制的理解。
 (4)请根据自身情况，进一步阅读分析相关系统调用的内核源码实现。
-
 # 2.设计要求
-
 ### 模拟shell
 #### 实验要求
 ```
@@ -23,7 +21,6 @@ int main()
 **cmd2**
 ```
 #include <stdio.h>
-
 int main()
 {
     printf("[*] Hello world! I'm cmd3.\n");
@@ -33,13 +30,15 @@ int main()
 **cmd3**
 ```
 #include <stdio.h>
-
 int main()
 {
     printf("[*] Hello world! I'm cmd3.\n");
     return 0;
 }
 ```
+
+---
+
 **shell**
 ```
 #include <stdio.h>
@@ -101,26 +100,29 @@ int main() {
 ```
 **实验效果**
 
-![[file-20250328105710624.png]]模拟shell
+![[file-20250328105710624.png]]
+如图输入./cmd + 序号之后就会通过excelp执行对应的子程序。
+
+---
 ### 实验详解
+1. **进程与程序关系**：
+	- 程序是存储在磁盘上的可执行文件（如cmd1、cmd2）
+	- 进程是程序在内存中的动态执行实例
+	- 每个命令执行时都会创建新的进程空间
+2. fork()
+	 创建一个普通进程，调用一次返回两次，子进程中返回 `0` ，父进程中返回 **`子进程pid`** 。
+3.  execl()
+	`execl(const char *path, const char *arg, ... NULL)` : 第一个参数 `path` 字符指针所指向要执行的文件路径， 接下来的参数代表执行该文件时传递的参数列表：`argv[0]` , `argv[1]` ... 最后一个参数须用空指针 `NULL` 作结束。
 
-#### fork()
+![[模拟shell详解.png]]
 
-`fork()` : 创建一个普通进程，调用一次返回两次，子进程中返回 `0` ，父进程中返回 **`子进程pid`** 。
-
-#### execl()
-
-`execl(const char *path, const char *arg, ... NULL)` : 第一个参数 `path` 字符指针所指向要执行的文件路径， 接下来的参数代表执行该文件时传递的参数列表：`argv[0]` , `argv[1]` ... 最后一个参数须用空指针 `NULL` 作结束。
-
-
+---
 ## 管道通信
 由父进程创建一个管道，然后再创建三个子进程，并由这三个子进程利用管道与父进
 程之间进行通信：子进程发送信息，父进程等三个子进程全部发完消息后再接收信息。通
 信的具体内容可根据自己的需要随意设计，要求能试验阻塞型读写过程中的各种情况，测
 试管道的默认大小，并且要求利用POSIX信号量机制实现进程间对管道的互斥访问。运行
 程序，观察各种情况下，进程实际读写的字节数以及进程阻塞唤醒的情况。
-
-
 ### 父子进程通信
 
 ```
@@ -218,7 +220,7 @@ int main() {
     signal(SIGINT, sig_handler);
     
     // 增加并发写入许可数
-    mutex = sem_open(SEM_MUTEX, O_CREAT, 0644, 5);
+    mutex = sem_open(SEM_MUTEX, O_CREAT, 0644, 1);
     full = sem_open(SEM_FULL, O_CREAT, 0644, 0);
     
     if(pipe(pipe_fd) == -1) {
@@ -238,8 +240,9 @@ int main() {
 
 ```
 
+![[file-20250523110908391.png]]
 
-![[file-20250411104150067.png]]
+---
 ### 管道默认大小
 
 ```
@@ -302,13 +305,30 @@ void write_to_pipe(int fd[2])
 }
 ```
 
-
-
-
 ![[file-20250407105154710.png]]![[file-20250407105214501.png]]
 
+---
 ### 实验详解
-Linux的POSIX机制设计了一组精心设计的信号量接口进行操作，这些函数都是对成组的信号量进行操作的，他们都声明在sys/sem.h
+
+#### 匿名管道
+```
+a. 管道的4种情况
+   1. 正常情况，如果管道没有数据了，读端必须等待，直到有数据为止(写端写入数据了)
+   2. 正常情况，如果管道被写满了，写端必须等待，直到有空间为止(读端读走数据)
+   3. 写端关闭，读端一直读取, 读端会读到read返回值为0， 表示读到文件结尾
+   4. 读端关闭，写端一直写入，OS会直接杀掉写端进程，通过向目标进程发送SIGPIPE(13)信号，终止目标进程 
+b. 管道的5种特性
+    1. 匿名管道,可以允许具有血缘关系的进程之间进行进程间通信，常用与父子,仅限于此
+    2. 匿名管道，默认给读写端要提供同步机制 --- 了解现象就行
+    3. 面向字节流的 --- 了解现象就行
+    4. 管道的生命周期是随进程的
+    5. 管道是单向通信的，半双工通信的一种特殊情况
+```
+**以父子进程的管道通信为例：**
+![[file-20250516010806242.png]]
+
+
+而Linux的POSIX机制设计了一组精心设计的信号量接口进行操作，这些函数都是对成组的信号量进行操作的，他们都声明在sys/sem.h
 #### sem_t
   **sem_t 是在 POSIX 系统中用来实现信号量机制的类型**。它是一个不透明的数据结构，用于控制多个进程或线程对共享资源的访问。
   sem_t 提供了三个主要的函数接口：
@@ -322,6 +342,7 @@ sem_post：该函数用于释放信号量。它将信号量的计数值加一，
 sem_destroy：该函数是用于销毁一个已经初始化的信号量的函数，在使用完信号量后，通过调用该函数可以释放相关资源。  
 ```
 
+---
 ## 消息队列通信
 ### 实验要求
 ```
@@ -386,7 +407,7 @@ int main(void)
 
     msgid = msgget(IPC_PRIVATE, 0666|IPC_CREAT);
     if (msgid < 0) {
-        printf("[错误] msgget() 调用失败\n");  // 修改
+        printf("[错误] msgget() 调用失败\n");  
         exit(1);
     }
     pthread_create(&send_pid_1, NULL, send_thread_1, NULL);
@@ -409,8 +430,8 @@ void *send_thread_1(void *arg)
     while (1) {
         P(&send_psx);
 
-    printf("[消息计数: %d]\n", count);  // 修改
-        printf("[发送线程1] 请输入消息: ");  // 修改
+    printf("[消息计数: %d]\n", count);  
+        printf("[发送线程1] 请输入消息: ");  
         scanf("%s", info);
   
         if ((strcmp(info, "exit") == 0) || (strcmp(info, "end1") == 0)) {
@@ -428,7 +449,7 @@ void *send_thread_1(void *arg)
     P(&final_recv_1);
 
     msgrcv(msgid, &s_msg, sizeof(struct msgbuf), recv_type, 0);
-    printf("[发送线程1] 收到应答: %s\n", s_msg.mtext);  // 修改
+    printf("[发送线程1] 收到应答: %s\n", s_msg.mtext);  
     count++;
 
     V(&send_psx);                  
@@ -448,8 +469,8 @@ void *send_thread_2(void *arg)
     while (1) {
         P(&send_psx);
 
-    printf("[消息计数: %d]\n", count);  // 修改
-        printf("[发送线程2] 请输入消息: ");  // 修改
+    printf("[消息计数: %d]\n", count); 
+        printf("[发送线程2] 请输入消息: ");  
         scanf("%s", info);
       
         if ((strcmp(info, "exit") == 0) || (strcmp(info, "end2") == 0)) {
@@ -468,7 +489,7 @@ void *send_thread_2(void *arg)
 
     count++;
     msgrcv(msgid, &s_msg, sizeof(struct msgbuf), recv_type, 0);
-    printf("[发送线程2] 收到应答: %s\n", s_msg.mtext);  // 修改
+    printf("[发送线程2] 收到应答: %s\n", s_msg.mtext);  
 
     V(&send_psx);                   
 
@@ -490,13 +511,13 @@ void *recv_thread(void *arg)
                 r_msg.mtype = recv_type;
         r_msg.mw2w = recv_to_send_1;
                 msgsnd(msgid, &r_msg, sizeof(struct msgbuf), 0);
-                printf("[接收线程] 收到来自发送线程1的结束信号，返回应答: over1\n");  // 修改
+                printf("[接收线程] 收到来自发送线程1的结束信号，返回应答: over1\n");  
 
                 V(&final_recv_1);
                 send_1_over = true;
             }
             else {
-                printf("[接收线程] 收到来自发送线程1的消息: %s\n", r_msg.mtext);  // 修改
+                printf("[接收线程] 收到来自发送线程1的消息: %s\n", r_msg.mtext);  
             V(&send_psx);
         }
     }
@@ -506,14 +527,14 @@ void *recv_thread(void *arg)
                 r_msg.mtype = recv_type;
         r_msg.mw2w = recv_to_send_2;
                 msgsnd(msgid, &r_msg, sizeof(struct msgbuf), 0);
-                printf("[接收线程] 收到来自发送线程2的结束信号，返回应答: over2\n");  // 修改
+                printf("[接收线程] 收到来自发送线程2的结束信号，返回应答: over2\n");  
 
                 V(&final_recv_2);
         send_2_over = true;
                 
             }
             else {
-                printf("[接收线程] 收到来自发送线程2的消息: %s\n", r_msg.mtext);  // 修改
+                printf("[接收线程] 收到来自发送线程2的消息: %s\n", r_msg.mtext);  
             V(&send_psx);
         }
     }
@@ -537,8 +558,6 @@ void V(sem_t *sem_ptr)
 }
 
 ```
-
-
 ### 实验结果
 [消息计数: 1]
 [发送线程1] 请输入消息: hi
@@ -576,7 +595,31 @@ int msgrcv(int msqid, void *msg_ptr, size_t msg_sz, long int msgtype, int msgflg
 
 int msgsnd(int msqid, const void *msg_ptr, size_t msg_sz, int msgflg);# 发送消息
 ```
+#### 执行时序图
+```mermaid
+sequenceDiagram
+    participant S1 as sender1
+    participant S2 as sender2
+    participant R as receiver
+    participant MQ as 消息队列
+    
+    S1->>MQ: P(send_psx)
+    S1->>+MQ: 输入消息A
+    MQ-->>-R: 传递消息A
+    R->>MQ: V(recv_psx)
+    
+    S2->>MQ: P(send_psx)阻塞
+    R->>MQ: 处理消息A
+    R->>MQ: V(send_psx)
+    
+    S2->>MQ: 获取锁
+    S2->>+MQ: 输入消息B
+    MQ-->>-R: 传递消息B
+    R->>MQ: V(recv_psx)
 
+```
+
+---
 ## 共享内存通信
 ### 实验要求
 ```
@@ -786,9 +829,36 @@ int main() {
 }
 ```
 ![[file-20250407113515131.png]]![[file-20250407113533645.png]]
+PS：在先启动receiver时，由于没有sender创建共享内存，所以无法启动receiver
+![[file-20250523104105436.png]]
+
+---
 ### 实验详解
 **两个进程地址通过页表映射到同一片物理地址以便于通信,你可以给一个区域里面写入数据，理所当然你就可以从中拿取数据，这也就构成了进程间的双向通信**
 ![[file-20250411120524222.png]]
+```mermaid
+flowchart LR
+    subgraph Sender进程
+        S_Input[用户输入] --> S_Proc[处理逻辑]
+        S_Proc --> S_Shmem[(共享内存)]
+        S_Proc --> S_Sem[信号量操作]
+    end
+
+    subgraph Receiver进程
+        R_Shmem[(共享内存)] --> R_Proc[处理逻辑]
+        R_Proc --> R_Output[终端显示]
+        R_Proc --> R_Sem[信号量操作]
+    end
+
+    S_Sem <-->|SEM_MUTEX| 信号量组
+    R_Sem <-->|SEM_MUTEX| 信号量组
+    S_Sem <-->|SEM_SYNC| 信号量组
+    R_Sem <-->|SEM_SYNC| 信号量组
+
+    style S_Shmem fill:#ccffcc,stroke:#00ff00
+    style R_Shmem fill:#ccffcc,stroke:#00ff00
+
+```
 #### 具体函数
 ```
 创建共享内存——>shmget() 函数

@@ -1,41 +1,56 @@
 {
   "main": {
-    "id": "d08feafff6837ea6",
+    "id": "2dbac52863b7e59b",
     "type": "split",
     "children": [
       {
-        "id": "2a735fea566ca060",
+        "id": "2f63c085a19cda1c",
         "type": "tabs",
         "children": [
           {
-            "id": "15b80f8833d69217",
+            "id": "59feb3d275d80c0e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "game/卡牌战棋游戏/基本系统.md",
+                "file": "game/卡牌战棋游戏/card game(TODO).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基本系统"
+              "title": "card game(TODO)"
+            }
+          },
+          {
+            "id": "1934da31dc36830c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "game/卡牌战棋游戏/长期个人学习项目  初定终版.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "长期个人学习项目  初定终版"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "5312ef056a2c4c77",
+    "id": "37707d83794585f2",
     "type": "split",
     "children": [
       {
-        "id": "16a12b8a487054ab",
+        "id": "3317dc9b55d1ae4f",
         "type": "tabs",
         "children": [
           {
-            "id": "0968205cf39714d6",
+            "id": "26bb96985877d7eb",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +63,7 @@
             }
           },
           {
-            "id": "7ab83a3b8a219e2b",
+            "id": "e629aca2a19f896f",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +80,7 @@
             }
           },
           {
-            "id": "7256831fa4a0c7b9",
+            "id": "6d4990a40291d730",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -78,23 +93,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "0db8768ab0ab35dc",
+    "id": "1f976d8251980d2b",
     "type": "split",
     "children": [
       {
-        "id": "febc141fb4383b0c",
+        "id": "628caf881b5d27a7",
         "type": "tabs",
         "children": [
           {
-            "id": "6663db5faa2b1a63",
+            "id": "00ad65f64b35c869",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "game/长期个人学习项目  初定终版.md",
+                "file": "game/卡牌战棋游戏/card game(TODO).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,60 +119,54 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "长期个人学习项目  初定终版 的反向链接列表"
+              "title": "card game(TODO) 的反向链接列表"
             }
           },
           {
-            "id": "6d25e7a57363a136",
+            "id": "752a27fd13d8407a",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "game/长期个人学习项目  初定终版.md",
+                "file": "game/卡牌战棋游戏/card game(TODO).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "长期个人学习项目  初定终版 的出链列表"
+              "title": "card game(TODO) 的出链列表"
             }
           },
           {
-            "id": "47bbcfd72150220f",
+            "id": "a374cbd597ed724f",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "标签"
             }
           },
           {
-            "id": "8067010a576d612b",
+            "id": "e64d6cbe28f30e99",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "game/卡牌系统.md"
+                "file": "game/卡牌战棋游戏/card game(TODO).md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "卡牌系统 的大纲"
-            }
-          },
-          {
-            "id": "b4bc0218432cf43d",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {},
-              "icon": "spreadsheet",
-              "title": "Advanced Tables"
+              "title": "card game(TODO) 的大纲"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -166,67 +175,30 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "zk-prefixer:创建时间戳笔记": false,
+      "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "switcher:打开快速切换": false,
+      "zk-prefixer:创建时间戳笔记": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "media-extended:Open media": false,
       "sheet-plus:创建 Excel 文件": false
     }
   },
-  "active": "15b80f8833d69217",
+  "active": "1934da31dc36830c",
   "lastOpenFiles": [
-    "game/卡牌战棋游戏/长期个人学习项目  初定终版.md",
-    "game/卡牌战棋游戏/卡牌.md",
-    "game/卡牌战棋游戏/基本系统.md",
-    "game/卡牌战棋游戏/card game(TODO).md",
-    "game/卡牌战棋游戏/商店UI.png",
-    "game/卡牌战棋游戏/UI设计.md",
-    "复习_面试/操作系统实践/实验三 Linux进程管理.md",
-    "game/燎原之径/开发日志.md",
-    "game/燎原之径/燎原之径.md",
-    "game/燎原之径/assets/燎原之径/file-20250422201942907.png",
-    "game/燎原之径/assets/燎原之径",
-    "game/燎原之径/assets",
-    "game/燎原之径",
-    "复习_面试/操作系统实践/实验一 Linux内核模块编程.md",
-    "game/assets/燎原之径",
-    "game/assets",
-    "game/卡牌战棋游戏/策划案.md",
-    "game/卡牌战棋游戏/assets/随机事件表.md",
-    "game/卡牌战棋游戏/assets/基本系统/file-20250421202613818.png",
-    "game/卡牌战棋游戏/assets/基本系统/file-20250421174658734.png",
-    "game/卡牌战棋游戏/遗物.md",
-    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250411120524222.png",
-    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250411113631305.png",
-    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250411104150067.png",
-    "复习_面试/操作系统实践/实验一 Linux内核模块编程 1.md",
-    "game/卡牌战棋游戏/Bug.md",
-    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407113533645.png",
-    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407113515131.png",
-    "复习_面试/操作系统实践/assets/实验三 Linux进程管理/file-20250407111043590.png",
-    "game/卡牌战棋游戏/().md",
-    "game/卡牌战棋游戏/知识文档.md",
-    "待办事项.md",
-    "复习_面试/游戏拆解案/拆解案.md",
-    "Excalidraw/Drawing 2025-02-02 23.56.40.excalidraw.md",
-    "复习_面试/游戏拆解案/公司实习生岗位1.md",
-    "复习_面试/游戏拆解案/酒馆战棋拆解&体验分析.md",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/ps9953.tmp",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/psFF17.tmp",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/ps31ED.tmp",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/ps2526.tmp",
-    "复习_面试/游戏拆解案/assets/酒馆战棋拆解&体验分析/ps8EA3.tmp",
-    "复习_面试/游戏拆解案/未命名.md",
-    "复习_面试/游戏拆解案/体验报告.md",
     "game/卡牌战棋游戏/在开发过程中犯下的错误.md",
-    "1.md",
-    "game/分析文档.canvas",
-    "game/未命名 1.canvas"
+    "game/卡牌战棋游戏/策划案.md",
+    "game/卡牌战棋游戏/知识文档.md",
+    "game/卡牌战棋游戏/card game(TODO).md",
+    "game/卡牌战棋游戏/长期个人学习项目  初定终版.md",
+    "game/卡牌战棋游戏/assets/card game(TODO)/任务线.png",
+    "game/卡牌战棋游戏/基本系统.md",
+    "Excalidraw/Drawing 2025-06-23 21.37.54.excalidraw.md",
+    "待办事项.md",
+    "game/卡牌战棋游戏/assets/card game(TODO)/TODO——重构地图存储的数据结构.png"
   ]
 }

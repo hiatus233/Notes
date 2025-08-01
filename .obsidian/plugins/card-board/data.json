@@ -1,0 +1,70 @@
+{
+  "version": "0.13.0",
+  "data": {
+    "boardConfigs": [
+      {
+        "columns": [
+          {
+            "tag": "completed",
+            "data": {
+              "collapsed": false,
+              "index": 0,
+              "limit": 10,
+              "name": "已完成"
+            }
+          },
+          {
+            "tag": "dated",
+            "data": {
+              "collapsed": false,
+              "name": "有日期的TODO",
+              "range": {
+                "tag": "before",
+                "data": 0
+              }
+            }
+          },
+          {
+            "tag": "undated",
+            "data": {
+              "collapsed": false,
+              "name": "无日期的TODO"
+            }
+          }
+        ],
+        "filters": [
+          {
+            "tag": "pathFilter",
+            "data": "game/卡牌战棋游戏/assets/card game(TODO)"
+          },
+          {
+            "tag": "pathFilter",
+            "data": "game/卡牌战棋游戏"
+          }
+        ],
+        "filterPolarity": "Allow",
+        "filterScope": "Both",
+        "name": "GameDev",
+        "showColumnTags": true,
+        "showFilteredTags": true
+      }
+    ],
+    "globalSettings": {
+      "defaultColumnNames": {
+        "today": "",
+        "tomorrow": "",
+        "future": "",
+        "undated": "",
+        "otherTags": "",
+        "untagged": "",
+        "completed": ""
+      },
+      "filters": [],
+      "firstDayOfWeek": "FromLocale",
+      "ignoreFileNameDates": false,
+      "taskCompletionFormat": "ObsidianTasks",
+      "taskCompletionInLocalTime": true,
+      "taskCompletionShowUtcOffset": true
+    }
+  }
+}
