@@ -7,9 +7,9 @@
   "displayYAMLFrontmatter": false,
   "linkStrippingBehaviour": "text",
   "highDPIDiagrams": true,
-  "pandoc": null,
+  "pandoc": " C:\\Users\\Lenovo\\AppData\\Roaming\\pandoc",
   "pdflatex": null,
-  "outputFolder": null,
+  "outputFolder": "E:\\Documents\\Obsidian Vault\\复习_面试\\游戏拆解案\\pandoc_Out",
   "extraArguments": "",
   "exportFrom": "html"
 }

@@ -49,6 +49,7 @@
       "name": "Bibliography"
     }
   ],
+  "pandocPath": {},
   "defaultExportDirectoryMode": "Auto",
   "openExportedFile": true,
   "env": {},
