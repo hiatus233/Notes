@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "game/新游戏/投骰是道.md",
+                "file": "game/卡牌战棋游戏/card game(TODO).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "投骰是道"
+              "title": "card game(TODO)"
             }
           }
         ],
@@ -202,14 +202,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "media-extended:Open media": false,
-      "sheet-plus:创建 Excel 文件": false,
-      "card-board:CardBoard": false
+      "sheet-plus:创建 Excel 文件": false
     }
   },
   "active": "c0c8cf220f74b429",
   "lastOpenFiles": [
-    "game/卡赢杯/初步的策划案.md",
+    "game/卡牌战棋游戏/assets/card game(TODO)/选中当前层.png",
+    "game/卡牌战棋游戏/card game(TODO).md",
+    "game/卡牌战棋游戏/assets/card game(TODO)/多层玩法深度耦合参考.png",
+    "game/卡牌战棋游戏/策划案.md",
     "game/新游戏/投骰是道.md",
+    "game/卡赢杯/初步的策划案.md",
     "game/随想/关于肉鸽游戏中.md",
     "复习_面试/游戏拆解案/杖剑传说拆解案.md",
     "待办事项.md",
@@ -221,7 +224,6 @@
     "复习_面试/游戏拆解案/简单探讨一下肉鸽与战棋结合的可行性.md",
     "复习_面试/游戏拆解案/公司实习生岗位1.md",
     "复习_面试/游戏拆解案/拆解案.md",
-    "game/卡牌战棋游戏/card game(TODO).md",
     "game/卡牌战棋游戏/assets/card game(TODO)/友军移动时图例.png",
     "game/卡牌战棋游戏/assets/card game(TODO)/用于显示移动范围-攻击范围的tile精灵图.png",
     "game/卡牌战棋游戏/assets/card game(TODO)/file-20251128125100798.png",
@@ -237,7 +239,6 @@
     "game/卡赢杯/对话框.gif",
     "game/卡赢杯/对话框.gif.wxdownload",
     "game/卡赢杯/点击npc后对话界面.png",
-    "game/卡赢杯/遇到npc.png",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内遇到NPC.rp",
     "game/卡赢杯/Drawing 2025-11-23 18.15.55.excalidraw.md",
     "game/卡赢杯/开发timeline表格.md",
@@ -246,8 +247,6 @@
     "game/卡赢杯",
     "game/卡牌战棋游戏/遗物.md",
     "game/卡牌战棋游戏/知识文档.md",
-    "game/卡牌战棋游戏/卡牌.md",
-    "game/卡牌战棋游戏/策划案.md",
     "game/卡牌战棋游戏/重构卡牌系统框架图.canvas",
     "复习_面试/毕业设计",
     "复习_面试/游戏拆解案/游戏视频文稿",
