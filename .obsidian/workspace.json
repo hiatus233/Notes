@@ -108,8 +108,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1f976d8251980d2b",
@@ -219,8 +218,12 @@
   },
   "active": "c0c8cf220f74b429",
   "lastOpenFiles": [
-    "game/新游戏/投骰是道项目排期.md",
+    "game/新游戏/assets/投骰是道/战斗流程图.png",
     "game/新游戏/投骰是道.md",
+    "game/新游戏/assets/投骰是道/骰子.png",
+    "game/新游戏/assets/投骰是道",
+    "game/新游戏/assets",
+    "game/新游戏/投骰是道项目排期.md",
     "复习_面试/游戏拆解案/杖剑传说拆解案.md",
     "game/卡牌战棋游戏/card game(TODO).md",
     "game/卡牌战棋游戏/卡牌.md",
@@ -252,20 +255,15 @@
     "俄罗斯方块消消消/所做工作.md",
     "复习_面试/毕业设计/开题答辩文本.md",
     "复习_面试/游戏拆解案/Stop the zombies 游戏我认为可以改进的点.md",
-    "复习_面试/游戏拆解案/酒馆战棋拆解&体验分析.md",
     "game/卡牌战棋游戏/assets/card game(TODO)/友军移动时图例.png",
     "game/卡牌战棋游戏/assets/card game(TODO)/用于显示移动范围-攻击范围的tile精灵图.png",
     "game/卡牌战棋游戏/assets/card game(TODO)/file-20251128125100798.png",
-    "game/卡牌战棋游戏/assets/card game(TODO)/2025.11.28 移动下显示bug.png",
-    "game/卡牌战棋游戏/assets/card game(TODO)/选中友军之后的表现.png",
     "game/卡赢杯/对话框.gif.wxdownload",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内遇到NPC.rp",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内战斗图.rp",
     "game/卡赢杯",
     "复习_面试/毕业设计",
     "复习_面试/游戏拆解案/游戏视频文稿",
-    "game/卡牌战棋游戏/assets/异度牌局策划案",
-    "game/卡牌战棋游戏/assets/异度牌局",
-    "game/卡牌战棋游戏/assets/异度牌局策划案/异度公司.xmind"
+    "game/卡牌战棋游戏/assets/异度牌局策划案"
   ]
 }
