@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "b8f0907c066c2394",
+        "id": "f2664aa319344f6c",
         "type": "tabs",
         "children": [
           {
-            "id": "1d716ba4576022f6",
+            "id": "cf2016fe243dd4f0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "game/新游戏/投骰是道.md",
+                "file": "复习_面试/游戏拆解案/《永恒的蔚蓝星球》拆解与体验报告.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "投骰是道"
+              "title": "《永恒的蔚蓝星球》拆解与体验报告"
             }
           }
         ]
@@ -93,7 +93,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "1f976d8251980d2b",
@@ -201,12 +202,14 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "1d716ba4576022f6",
+  "active": "cf2016fe243dd4f0",
   "lastOpenFiles": [
-    "复习_面试/游戏拆解案/永恒的蔚蓝星球拆解案.md",
+    "复习_面试/游戏拆解案/未命名思维导图.md",
+    "复习_面试/游戏拆解案/《永恒的蔚蓝星球》拆解与体验报告.md",
+    "复习_面试/游戏拆解案/未命名思维导图 1.md",
+    "game/新游戏/投骰是道.md",
     "game/卡牌战棋游戏/策划案.md",
     "game/卡牌战棋游戏/card game(TODO).md",
-    "game/新游戏/投骰是道.md",
     "game/新游戏/投骰是道项目排期.md",
     "game/卡牌战棋游戏/异度牌局策划案.md",
     "game/卡牌战棋游戏/在开发过程中犯下的错误.md",
@@ -240,8 +243,6 @@
     "game/随想/关于肉鸽游戏中.md",
     "待办事项.md",
     "1.md",
-    "俄罗斯方块消消消/所做工作.md",
-    "复习_面试/毕业设计/开题答辩文本.md",
     "game/卡牌战棋游戏/assets/card game(TODO)/友军移动时图例.png",
     "game/卡赢杯/对话框.gif.wxdownload",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内遇到NPC.rp",
