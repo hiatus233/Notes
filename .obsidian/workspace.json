@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "game/新游戏/投骰是道.md",
+                "file": "复习_面试/游戏拆解案/永恒的蔚蓝星球拆解案.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "投骰是道"
+              "title": "永恒的蔚蓝星球拆解案"
             }
           }
         ]
@@ -93,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1f976d8251980d2b",
@@ -198,39 +197,41 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "media-extended:Open media": false,
-      "sheet-plus:创建 Excel 文件": false,
-      "card-board:CardBoard": false
+      "sheet-plus:创建 Excel 文件": false
     }
   },
   "active": "1d716ba4576022f6",
   "lastOpenFiles": [
-    "game/卡赢杯/初步的策划案.md",
-    "game/新游戏/assets/投骰是道/骰子.png",
-    "game/新游戏/投骰是道.md",
-    "game/新游戏/assets/投骰是道/战斗流程图.png",
-    "game/新游戏/assets/投骰是道",
-    "game/新游戏/assets",
-    "game/新游戏/投骰是道项目排期.md",
-    "复习_面试/游戏拆解案/杖剑传说拆解案.md",
+    "game/卡牌战棋游戏/策划案.md",
+    "复习_面试/游戏拆解案/永恒的蔚蓝星球拆解案.md",
     "game/卡牌战棋游戏/card game(TODO).md",
-    "game/卡牌战棋游戏/卡牌.md",
-    "game/卡牌战棋游戏/assets/基本系统/卡牌配置表.md",
-    "game/卡牌战棋游戏/策划案的删减部分.md",
-    "复习_面试/游戏拆解案/游戏视频文稿/2025-10-28 游戏原型演示文稿.md",
+    "game/新游戏/投骰是道.md",
+    "game/新游戏/投骰是道项目排期.md",
+    "game/卡牌战棋游戏/异度牌局策划案.md",
+    "game/卡牌战棋游戏/在开发过程中犯下的错误.md",
+    "game/卡牌战棋游戏/长期个人学习项目  初定终版.md",
     "game/卡牌战棋游戏/知识文档.md",
     "game/卡牌战棋游戏/重构卡牌系统框架图.canvas",
+    "game/卡牌战棋游戏/Bug.md",
+    "game/卡牌战棋游戏/UI设计.md",
+    "game/卡牌战棋游戏/策划案的删减部分.md",
+    "game/卡牌战棋游戏/关于陷阵之志局内单关卡模板生成的思考.md",
+    "game/卡牌战棋游戏/卡牌.md",
+    "game/新游戏/assets/投骰是道/骰子.png",
+    "game/新游戏/assets/投骰是道/战斗流程图.png",
+    "复习_面试/游戏拆解案/终末地.md",
+    "game/卡赢杯/初步的策划案.md",
+    "复习_面试/游戏拆解案/assets/终末地/PixPin_2026-01-24_15-35-14.gif",
+    "复习_面试/游戏拆解案/assets/终末地/file-20260124153408890.png",
+    "复习_面试/游戏拆解案/assets/终末地",
+    "复习_面试/游戏拆解案/杖剑传说拆解案.md",
+    "game/卡牌战棋游戏/assets/基本系统/卡牌配置表.md",
+    "复习_面试/游戏拆解案/游戏视频文稿/2025-10-28 游戏原型演示文稿.md",
     "game/卡牌战棋游戏/猩红触手 — 完整设计草案（精炼版）.md",
     "game/卡牌战棋游戏/assets/长期个人学习项目/Map.png",
     "game/新游戏/未命名.canvas",
-    "game/卡牌战棋游戏/Bug.md",
-    "game/卡牌战棋游戏/长期个人学习项目  初定终版.md",
     "game/卡牌战棋游戏/双持.png",
-    "game/卡牌战棋游戏/策划案.md",
-    "game/卡牌战棋游戏/关于陷阵之志局内单关卡模板生成的思考.md",
     "game/卡牌战棋游戏/商店UI.png",
-    "game/卡牌战棋游戏/UI设计.md",
-    "game/卡牌战棋游戏/在开发过程中犯下的错误.md",
-    "game/卡牌战棋游戏/异度牌局策划案.md",
     "game/卡牌战棋游戏/遗物.md",
     "game/卡牌战棋游戏/assets/原型图/投骰是道纸面原型.rp",
     "game/卡牌战棋游戏/assets/card game(TODO)/楼层选中.gif",
@@ -240,16 +241,14 @@
     "1.md",
     "俄罗斯方块消消消/所做工作.md",
     "复习_面试/毕业设计/开题答辩文本.md",
-    "复习_面试/游戏拆解案/Stop the zombies 游戏我认为可以改进的点.md",
     "game/卡牌战棋游戏/assets/card game(TODO)/友军移动时图例.png",
-    "game/卡牌战棋游戏/assets/card game(TODO)/用于显示移动范围-攻击范围的tile精灵图.png",
-    "game/卡牌战棋游戏/assets/card game(TODO)/file-20251128125100798.png",
     "game/卡赢杯/对话框.gif.wxdownload",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内遇到NPC.rp",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内战斗图.rp",
     "game/卡赢杯",
     "复习_面试/毕业设计",
     "复习_面试/游戏拆解案/游戏视频文稿",
-    "game/卡牌战棋游戏/assets/异度牌局策划案"
+    "game/卡牌战棋游戏/assets/异度牌局策划案",
+    "game/卡牌战棋游戏/assets/异度牌局"
   ]
 }
