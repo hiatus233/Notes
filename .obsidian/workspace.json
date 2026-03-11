@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f2664aa319344f6c",
+        "id": "b8f0907c066c2394",
         "type": "tabs",
         "children": [
           {
-            "id": "cf2016fe243dd4f0",
+            "id": "1d716ba4576022f6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -93,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1f976d8251980d2b",
@@ -202,17 +201,19 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "cf2016fe243dd4f0",
+  "active": "26bb96985877d7eb",
   "lastOpenFiles": [
-    "复习_面试/游戏拆解案/酒馆战棋拆解&体验分析.md",
-    "复习_面试/游戏拆解案/《永恒的蔚蓝星球》拆解与体验报告.md",
-    "复习_面试/游戏拆解案/未命名思维导图.md",
-    "复习_面试/游戏拆解案/未命名思维导图 1.md",
-    "game/新游戏/投骰是道.md",
-    "game/卡牌战棋游戏/策划案.md",
-    "game/卡牌战棋游戏/card game(TODO).md",
-    "game/新游戏/投骰是道项目排期.md",
     "game/卡牌战棋游戏/异度牌局策划案.md",
+    "复习_面试/游戏拆解案/《永恒的蔚蓝星球》拆解与体验报告.md",
+    "复习_面试/游戏拆解案/assets/《永恒的蔚蓝星球》拆解与体验报告/file-20260312011538012.png",
+    "复习_面试/游戏拆解案/assets/《永恒的蔚蓝星球》拆解与体验报告/file-20260312011513543.png",
+    "game/卡牌战棋游戏/策划案.md",
+    "复习_面试/游戏拆解案/assets/《永恒的蔚蓝星球》拆解与体验报告/file-20260309230439770.png",
+    "复习_面试/游戏拆解案/assets/《永恒的蔚蓝星球》拆解与体验报告",
+    "game/卡牌战棋游戏/card game(TODO).md",
+    "game/新游戏/投骰是道.md",
+    "复习_面试/游戏拆解案/永恒的蔚蓝星球拆解案.md",
+    "game/新游戏/投骰是道项目排期.md",
     "game/卡牌战棋游戏/在开发过程中犯下的错误.md",
     "game/卡牌战棋游戏/长期个人学习项目  初定终版.md",
     "game/卡牌战棋游戏/知识文档.md",
@@ -239,18 +240,15 @@
     "game/卡牌战棋游戏/商店UI.png",
     "game/卡牌战棋游戏/遗物.md",
     "game/卡牌战棋游戏/assets/原型图/投骰是道纸面原型.rp",
-    "game/卡牌战棋游戏/assets/card game(TODO)/楼层选中.gif",
-    "game/卡牌战棋游戏/assets/card game(TODO)/多层玩法深度耦合参考.png",
     "game/随想/关于肉鸽游戏中.md",
     "待办事项.md",
-    "game/卡牌战棋游戏/assets/card game(TODO)/友军移动时图例.png",
+    "1.md",
     "game/卡赢杯/对话框.gif.wxdownload",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内遇到NPC.rp",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内战斗图.rp",
     "game/卡赢杯",
     "复习_面试/毕业设计",
     "复习_面试/游戏拆解案/游戏视频文稿",
-    "game/卡牌战棋游戏/assets/异度牌局策划案",
-    "game/卡牌战棋游戏/assets/异度牌局"
+    "game/卡牌战棋游戏/assets/异度牌局策划案"
   ]
 }
