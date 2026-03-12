@@ -80,20 +80,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "game/卡牌战棋游戏/策划案的删减部分.md",
+                "file": "复习_面试/游戏拆解案/《永恒的蔚蓝星球》拆解与体验报告.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "策划案的删减部分 的大纲"
+              "title": "《永恒的蔚蓝星球》拆解与体验报告 的大纲"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "1f976d8251980d2b",
@@ -201,10 +203,12 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "26bb96985877d7eb",
+  "active": "1d716ba4576022f6",
   "lastOpenFiles": [
-    "game/卡牌战棋游戏/异度牌局策划案.md",
     "复习_面试/游戏拆解案/《永恒的蔚蓝星球》拆解与体验报告.md",
+    "复习_面试/游戏拆解案/未命名 1.base",
+    "复习_面试/游戏拆解案/未命名.base",
+    "game/卡牌战棋游戏/异度牌局策划案.md",
     "复习_面试/游戏拆解案/assets/《永恒的蔚蓝星球》拆解与体验报告/file-20260312011538012.png",
     "复习_面试/游戏拆解案/assets/《永恒的蔚蓝星球》拆解与体验报告/file-20260312011513543.png",
     "game/卡牌战棋游戏/策划案.md",
@@ -247,8 +251,6 @@
     "game/卡牌战棋游戏/assets/原型图/光之桥局内遇到NPC.rp",
     "game/卡牌战棋游戏/assets/原型图/光之桥局内战斗图.rp",
     "game/卡赢杯",
-    "复习_面试/毕业设计",
-    "复习_面试/游戏拆解案/游戏视频文稿",
-    "game/卡牌战棋游戏/assets/异度牌局策划案"
+    "复习_面试/毕业设计"
   ]
 }
