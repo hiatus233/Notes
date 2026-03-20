@@ -9,7 +9,9 @@
     "margin": "2",
     "downscalePercent": 90
   },
-  "promptDelete": false,
+  "promptDelete": true,
   "showLineNumber": false,
-  "readableLineLength": true
+  "readableLineLength": true,
+  "useMarkdownLinks": false,
+  "newLinkFormat": "relative"
 }
