@@ -7,7 +7,7 @@
           {
             "tag": "completed",
             "data": {
-              "collapsed": false,
+              "collapsed": true,
               "index": 0,
               "limit": 10,
               "name": "已完成"
@@ -16,7 +16,7 @@
           {
             "tag": "dated",
             "data": {
-              "collapsed": false,
+              "collapsed": true,
               "name": "有日期的TODO",
               "range": {
                 "tag": "before",
@@ -29,6 +29,14 @@
             "data": {
               "collapsed": false,
               "name": "无日期的TODO"
+            }
+          },
+          {
+            "tag": "namedTag",
+            "data": {
+              "collapsed": false,
+              "name": "美术资产",
+              "tag": "Art"
             }
           }
         ],
