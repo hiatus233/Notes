@@ -259,6 +259,7 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	- [ ] 添加虚弱(Weakness)，额外抽牌(ExtraDrawCard)Buff。重置模块的触发时序不对，需要修改一下，应该是回合开始。
 	- [ ] Buff系统看个大概，起码了解一下
 	- [ ] 考虑将我们的整体流程都固定在战斗房间内，把商店房，休息房，随机事件等等都固定到战斗场景中以保持一致性与沉浸感。
+	- [ ] 继续完成boss房间的设计，美术资源与程序部分同步。
 
 
 # 优化需求
