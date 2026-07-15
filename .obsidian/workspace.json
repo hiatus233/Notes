@@ -202,7 +202,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidian-kanban:Create new board": false,
+      "obsidian-kanban:创建新看板": false,
       "bases:新建数据库": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
@@ -214,8 +214,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "media-extended:Open media": false,
-      "sheet-plus:创建 Excel 文件": false,
-      "card-board:CardBoard": false
+      "sheet-plus:创建 Excel 文件": false
     }
   },
   "active": "e7a36f4af20c90a8",
