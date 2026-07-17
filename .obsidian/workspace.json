@@ -214,8 +214,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "media-extended:Open media": false,
-      "sheet-plus:创建 Excel 文件": false,
-      "card-board:CardBoard": false
+      "sheet-plus:创建 Excel 文件": false
     }
   },
   "active": "e7a36f4af20c90a8",
