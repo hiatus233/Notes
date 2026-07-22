@@ -253,7 +253,9 @@ public class EnemyIntent : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 				- [ ] 精英史莱姆
 				- [ ] 精英炮台花
 			- [ ] Boss
-				- [ ] 
+				- [ ] 赤红触手逻辑完善
+				- [ ] 赤红触手美术资产填充
+				- [ ] 优化敌人AI架构以支撑boss状态机的设计
 		- [ ] 遗物
 	- [x] 将碰撞伤害改为百分比的生命值。 ✅ 2026-03-09
 	- [ ] 添加虚弱(Weakness)，额外抽牌(ExtraDrawCard)Buff。重置模块的触发时序不对，需要修改一下，应该是回合开始。
